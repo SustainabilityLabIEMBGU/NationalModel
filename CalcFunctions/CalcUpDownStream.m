@@ -1,6 +1,6 @@
  function UpDownStreamEmissions = CalcUpDownStream(EmissionsByYears)
     UpDownStreamEmissions = array2table(zeros(12, width(EmissionsByYears)));
-    UpDownStreamEmissions.Properties.RowNames = {'Electricity-Local', 'Electricity-Global','Transportation-Local','Transportation-Global','Food-Local','Food-Global', 'Construction-Local','Construction-Global', 'Water-Local','Water-Global', '11 Materials','12 Total'};%%'6 Food-Global'
+    UpDownStreamEmissions.Properties.RowNames = {'Electricity-Local', 'Electricity-Global','Transportation-Local','Transportation-Global','Food-Local','Food-Global', 'Construction-Local','Construction-Global', 'Water-Local','Water-Global', 'Fuel for Industry - Local','Total'};%%'6 Food-Global'
     for i = 1:width(UpDownStreamEmissions)
         UpDownStreamEmissions{1,i} = sum(EmissionsByYears{2,i}{1,1}{1:4,9})/1000000;
         UpDownStreamEmissions{2,i} = sum(EmissionsByYears{3,i}{1,1}{:,7})/1000000;
@@ -22,6 +22,8 @@
     
         UpDownStreamEmissions{5,i} = sum(EmissionsByYears{1,i}{1,1}{1,1:2})/1000000;
         UpDownStreamEmissions{6,i} = sum(EmissionsByYears{1,i}{1,1}{1,3:5})/1000000;
+
+        UpDownStreamEmissions{11,i} = (sum(EmissionsByYears{9,i}{1,1}{1,:})+EmissionsByYears{9,i}{1,1}{2,6}+EmissionsByYears{9,i}{1,1}{3,6})/1000000;
 
     end
     
